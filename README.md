@@ -7,6 +7,10 @@ does not appear as registered even after setup.
 This script was built from a real troubleshooting run on macOS 26.5.1 with
 Chrome Remote Desktop Host 149.0.7827.18.
 
+Tracked upstream:
+
+<https://issues.chromium.org/issues/522541850>
+
 ## What It Fixes
 
 - Missing or broken `icudtl.dat` symlinks in nested CRD helper apps.
@@ -72,6 +76,10 @@ Logs are written to:
 ```
 
 ## Bug Notes For Google
+
+Chromium issue:
+
+<https://issues.chromium.org/issues/522541850>
 
 Observed issue:
 
