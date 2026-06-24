@@ -288,6 +288,22 @@ chmod 644 "$LAUNCH_AGENT"
 ROOT
 
 info "Starting broker and host launch agents"
+run_root_script <<ROOT
+set -eu
+rm -f /tmp/org.chromium.chromoting.wrapper.log \
+      /tmp/org.chromium.chromoting.launchd.out.log \
+      /tmp/org.chromium.chromoting.launchd.err.log
+touch /tmp/org.chromium.chromoting.wrapper.log \
+      /tmp/org.chromium.chromoting.launchd.out.log \
+      /tmp/org.chromium.chromoting.launchd.err.log
+chown "$(id -un)":"$(id -gn)" /tmp/org.chromium.chromoting.wrapper.log \
+      /tmp/org.chromium.chromoting.launchd.out.log \
+      /tmp/org.chromium.chromoting.launchd.err.log
+chmod 666 /tmp/org.chromium.chromoting.wrapper.log \
+      /tmp/org.chromium.chromoting.launchd.out.log \
+      /tmp/org.chromium.chromoting.launchd.err.log
+ROOT
+
 launchctl enable system/org.chromium.chromoting.broker >/dev/null 2>&1 || true
 launchctl bootstrap system "$BROKER_DAEMON" >/dev/null 2>&1 || true
 launchctl bootout "gui/$(id -u)" "$LAUNCH_AGENT" >/dev/null 2>&1 || true
